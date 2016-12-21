@@ -43,7 +43,7 @@ def simple_plot():
     # 图形显示
     plt.show()
     return
-# simple_plot()
+simple_plot()
 
 
 def simple_advanced_plot():
@@ -87,7 +87,7 @@ def simple_advanced_plot():
     # 图形显示
     plt.show()
     return
-# simple_advanced_plot()
+simple_advanced_plot()
 
 
 def subplot_plot():
@@ -111,7 +111,7 @@ def subplot_plot():
     plt.grid(True)
     plt.show()
     return
-# subplot_plot()
+#subplot_plot()
 
 
 def bar_plot():
@@ -141,12 +141,12 @@ def bar_plot():
     plt.ylim(0, 45)
     plt.xlabel("Group")
     plt.ylabel("Scores")
-    plt.xticks(index+bar_width, ("A组", "B组", "C组", "D组", "E组"))
+    plt.xticks(index+bar_width, ("A", "B", "C", "D", "E"))
 
     # 图形显示
     plt.show()
     return
-# bar_plot()
+#bar_plot()
 
 
 def barh_plot():
@@ -176,12 +176,12 @@ def barh_plot():
     plt.xlim(0, 45)
     plt.xlabel("Scores")
     plt.ylabel("Group")
-    plt.yticks(index+bar_height, ("A组", "B组", "C组", "D组", "E组"))
+    plt.yticks(index+bar_height, ("A", "B", "C", "D", "E"))
 
     # 图形显示
     plt.show()
     return
-# barh_plot()
+#barh_plot()
 
 
 def bar_advanced_plot():
@@ -217,7 +217,7 @@ def bar_advanced_plot():
     # 图形显示
     plt.show()
     return
-# bar_advanced_plot()
+#bar_advanced_plot()
 
 
 def table_plot():
@@ -249,7 +249,7 @@ def table_plot():
     # 图形显示
     plt.show()
     return
-# table_plot()
+#table_plot()
 
 
 def histograms_plot():
@@ -276,7 +276,7 @@ def histograms_plot():
     # 图形显示
     plt.show()
     return
-# histograms_plot()
+#histograms_plot()
 
 
 def pie_plot():
@@ -296,7 +296,7 @@ def pie_plot():
     # 图形显示
     plt.show()
     return
-# pie_plot()
+#pie_plot()
 
 
 def scatter_plot():
@@ -318,7 +318,7 @@ def scatter_plot():
     # 图形显示
     plt.show()
     return
-# scatter_plot()
+#scatter_plot()
 
 
 def fill_plot():
@@ -340,7 +340,7 @@ def fill_plot():
     # 图形显示
     plt.show()
     return
-# fill_plot()
+#fill_plot()
 
 
 def radar_plot():
@@ -371,7 +371,7 @@ def radar_plot():
     # 图形显示
     plt.show()
     return
-# radar_plot()
+#radar_plot()
 
 
 def three_dimension_scatter():
@@ -407,7 +407,7 @@ def three_dimension_scatter():
     # 图形显示
     plt.show()
     return
-# three_dimension_scatter()
+#three_dimension_scatter()
 
 
 def three_dimension_line():
@@ -436,7 +436,7 @@ def three_dimension_line():
     # 图形显示
     plt.show()
     return
-# three_dimension_line()
+#three_dimension_line()
 
 
 def three_dimension_bar():
@@ -469,4 +469,4 @@ def three_dimension_bar():
     # 图形显示
     plt.show()
     return
-# three_dimension_bar()
+#three_dimension_bar()
