@@ -4,13 +4,13 @@ fname为所读xx.txt文件
 输出为：文件第一行和最后一行
 '''
 
-fname = 'test.txt'
+fname = 'C:/Users/eyulcui/Dropbox/LearnPython/raw_log/eggs1.log'
 with open(fname, 'r') as f:  #打开文件
     lines = f.readlines() #读取所有行
     first_line = lines[0] #取第一行
     last_line = lines[-1] #取最后一行
-    print '文件' + fname + '第一行为：' + first_line
-    print '文件' + fname + '最后一行为：'+ last_line
+    print ('文件' + fname + '第一行为：' + first_line)
+    print ('文件' + fname + '最后一行为：'+ last_line)
 
 
 #coding:utf-8
@@ -19,7 +19,7 @@ f_name为所读xx.txt文件
 输出为：文件最后一行
 '''
 
-fname = 'test.txt'
+fname = 'C:/Users/eyulcui/Dropbox/LearnPython/raw_log/eggs1.log'
 with open(fname, 'r') as f:  #打开文件
     first_line = f.readline()  #读第一行
     off = -50      #设置偏移量
@@ -33,5 +33,5 @@ with open(fname, 'r') as f:  #打开文件
         #所以off翻倍重新运行，直到readlines不止一行
         off *= 2
 
-    print '文件' + fname + '第一行为：' + first_line
-    print '文件' + fname + '最后一行为：'+ last_line
+    print ('文件' + fname + '第一行为：' + first_line)
+    print ('文件' + fname + '最后一行为：'+ last_line)

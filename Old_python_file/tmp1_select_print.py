@@ -11,9 +11,10 @@ def Line_handle(line):
     new_info2 = [new_info1[i] for i in predef_select_ie]
     return new_info2
 
-with open('eggs1.log') as f:
+#"c:/Users/eyulcui/Documents/tmp/lienb2466_20170104_1752_bb.log.dec"
+with open('C:/Users/eyulcui/Dropbox/LearnPython/raw_log/eggs1.log') as f:
     for line in f:
         split_line = Line_handle(line)
-        print split_line
+        print (split_line)
 
 

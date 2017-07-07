@@ -76,8 +76,8 @@ for line in f1:
 
 frame = DataFrame(output_array, columns=['aa', 'bb', 'cc', 'dd', 'ee'])
 
-print frame
-print frame.dtypes
+print (frame)
+print (frame.dtypes)
 
 
 

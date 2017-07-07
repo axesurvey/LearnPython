@@ -92,40 +92,40 @@ def UseStyle(string, mode = '', fore = '', back = ''):
 
 def TestColor( ):
 
-    print UseStyle('正常显示')
-    print ''
+    print (UseStyle('正常显示'))
+    print ('')
 
-    print "测试显示模式"
-    print UseStyle('高亮',   mode = 'bold'),
-    print UseStyle('下划线', mode = 'underline'),
-    print UseStyle('闪烁',   mode = 'blink'),
-    print UseStyle('反白',   mode = 'invert'),
-    print UseStyle('不可见', mode = 'hide')
-    print ''
-
-
-    print "测试前景色"
-    print UseStyle('黑色',   fore = 'black'),
-    print UseStyle('红色',   fore = 'red'),
-    print UseStyle('绿色',   fore = 'green'),
-    print UseStyle('黄色',   fore = 'yellow'),
-    print UseStyle('蓝色',   fore = 'blue'),
-    print UseStyle('紫红色', fore = 'purple'),
-    print UseStyle('青蓝色', fore = 'cyan'),
-    print UseStyle('白色',   fore = 'white')
-    print ''
+    print ("测试显示模式")
+    print (UseStyle('高亮',   mode = 'bold'),)
+    print (UseStyle('下划线', mode = 'underline'),)
+    print (UseStyle('闪烁',   mode = 'blink'),)
+    print (UseStyle('反白',   mode = 'invert'),)
+    print (UseStyle('不可见', mode = 'hide'))
+    print ('')
 
 
-    print "测试背景色"
-    print UseStyle('黑色',   back = 'black'),
-    print UseStyle('红色',   back = 'red'),
-    print UseStyle('绿色',   back = 'green'),
-    print UseStyle('黄色',   back = 'yellow'),
-    print UseStyle('蓝色',   back = 'blue'),
-    print UseStyle('紫红色', back = 'purple'),
-    print UseStyle('青蓝色', back = 'cyan'),
-    print UseStyle('白色',   back = 'white')
-    print ''
+    print ("测试前景色")
+    print (UseStyle('黑色',   fore = 'black'),)
+    print (UseStyle('红色',   fore = 'red'),)
+    print (UseStyle('绿色',   fore = 'green'),)
+    print (UseStyle('黄色',   fore = 'yellow'),)
+    print (UseStyle('蓝色',   fore = 'blue'),)
+    print (UseStyle('紫红色', fore = 'purple'),)
+    print (UseStyle('青蓝色', fore = 'cyan'),)
+    print (UseStyle('白色',   fore = 'white'))
+    print ('')
+
+
+    print ("测试背景色")
+    print (UseStyle('黑色',   back = 'black'),)
+    print (UseStyle('红色',   back = 'red'),)
+    print (UseStyle('绿色',   back = 'green'),)
+    print (UseStyle('黄色',   back = 'yellow'),)
+    print (UseStyle('蓝色',   back = 'blue'),)
+    print (UseStyle('紫红色', back = 'purple'),)
+    print (UseStyle('青蓝色', back = 'cyan'),)
+    print (UseStyle('白色',   back = 'white'))
+    print ('')
 
 def remove_empty_in_list(old_list):
     new_list = []
@@ -1308,17 +1308,17 @@ new_log_list = readmsgthroughsymbolpreamble(log_path, max_line=max_line_tmp)
 #print new_log_list[1]
 #for tmp_print in new_log_list[2]:
 #    print tmp_print
-print "\n"
-print UseStyle("######### 1  MSG1 Preamble: UpUlCellPeCiScheduleRaResponseInd and nrOfPreambles not zero #########",   fore = 'green')
+print ("\n")
+print (UseStyle("######### 1  MSG1 Preamble: UpUlCellPeCiScheduleRaResponseInd and nrOfPreambles not zero #########",   fore = 'green'))
 for i in new_log_list[1]:
-    print i + "      ",
-print "\n"
+    print (i + "      ",)
+print ("\n")
 for i in new_log_list[2]:
     for j in range(len(i) - 1):
         tmp_str = "%-" + str(new_log_list[3][j]) + "s "
-        print tmp_str % i[j],
+        print (tmp_str % i[j],)
     tmp_str_last = "%-" + str(new_log_list[3][len(new_log_list[1]) - 1]) + "s "
-    print tmp_str_last % i[len(new_log_list[1]) - 1]
+    print (tmp_str_last % i[len(new_log_list[1]) - 1])
 
 new_log_list = readmsgthroughsymbolrar(log_path, max_line=max_line_tmp)
 #print "cellId     sfn        subframe   preambleId bbUeRef    taCommand  ulGrant              prachCeLevel         temporaryCrnti  (RAR MSG)"
@@ -1327,17 +1327,17 @@ new_log_list = readmsgthroughsymbolrar(log_path, max_line=max_line_tmp)
 #print new_log_list[1]
 #for tmp_print in new_log_list[2]:
 #    print tmp_print
-print "\n"
-print UseStyle("######### 2  MSG1 Handle RAR: UpcDlMacCeFiScheduleRaMsg2Req only #########",   fore = 'green')
+print ("\n")
+print (UseStyle("######### 2  MSG1 Handle RAR: UpcDlMacCeFiScheduleRaMsg2Req only #########",   fore = 'green'))
 for i in new_log_list[1]:
-    print i + "      ",
-print "\n"
+    print (i + "      ",)
+print ("\n")
 for i in new_log_list[2]:
     for j in range(len(i) - 1):
         tmp_str = "%-" + str(new_log_list[3][j]) + "s "
-        print tmp_str % i[j],
+        print (tmp_str % i[j],)
     tmp_str_last = "%-" + str(new_log_list[3][len(new_log_list[1]) - 1]) + "s "
-    print tmp_str_last % i[len(new_log_list[1]) - 1]
+    print (tmp_str_last % i[len(new_log_list[1]) - 1])
 
 new_log_list = readmsgthroughsymbolmpdcch(log_path, max_line=max_line_tmp)
 #print "cellId     sfn        subframe   rnti       bbUeRef    dciMsg     totalNrOfMpdcchDci   nrOfPayloadBit   mpdcchblockindex  (MPDCCH)"
@@ -1346,17 +1346,17 @@ new_log_list = readmsgthroughsymbolmpdcch(log_path, max_line=max_line_tmp)
 #print new_log_list[1]
 #for tmp_print in new_log_list[2]:
 #    print tmp_print
-print "\n"
-print UseStyle("######### 3   MSG2 MSG3 MSG4 MPDCCH: UpDlMacPeCiMpdcchInd and totalNrOfMpdcchDci not zero #########",   fore = 'green')
+print ("\n")
+print (UseStyle("######### 3   MSG2 MSG3 MSG4 MPDCCH: UpDlMacPeCiMpdcchInd and totalNrOfMpdcchDci not zero #########",   fore = 'green'))
 for i in new_log_list[1]:
-    print i + "      ",
-print "\n"
+    print (i + "      ",)
+print ("\n")
 for i in new_log_list[2]:
     for j in range(len(i) - 1):
         tmp_str = "%-" + str(new_log_list[3][j]) + "s "
-        print tmp_str % i[j],
+        print (tmp_str % i[j],)
     tmp_str_last = "%-" + str(new_log_list[3][len(new_log_list[1]) - 1]) + "s "
-    print tmp_str_last % i[len(new_log_list[1]) - 1]
+    print (tmp_str_last % i[len(new_log_list[1]) - 1])
 
 new_log_list = readmsgthroughsymbolmsg2pdsch(log_path, max_line=max_line_tmp)
 #print "cellId     sfn        subframe   rnti       ulGrant    tmpCRnti   msgType              rapid                ta         nrOfRar   (PDSCH)"
@@ -1365,22 +1365,25 @@ new_log_list = readmsgthroughsymbolmsg2pdsch(log_path, max_line=max_line_tmp)
 #print new_log_list[1]
 #for tmp_print in new_log_list[2]:
 #    print tmp_print
-print "\n"
-print UseStyle("######### 4   MSG2 PDSCH CATM CCH Alloc: UpDlMacPeCiDlCatmCchAllocInd and nrOfRaMsg2Msg not zero #########",   fore = 'green')
+print ("\n")
+print (UseStyle("######### 4   MSG2 PDSCH CATM CCH Alloc: UpDlMacPeCiDlCatmCchAllocInd and nrOfRaMsg2Msg not zero #########",   fore = 'green'))
 for i in new_log_list[1]:
-    print i + "      ",
-print "\n"
+    print (i + "      ",)
+print ("\n")
 for i in new_log_list[2]:
     for j in range(len(i) - 1):
         tmp_str = "%-" + str(new_log_list[3][j]) + "s "
-        print tmp_str % i[j],
+        print (tmp_str % i[j],)
     tmp_str_last = "%-" + str(new_log_list[3][len(new_log_list[1]) - 1]) + "s "
-    print tmp_str_last % i[len(new_log_list[1]) - 1]
+    print (tmp_str_last % i[len(new_log_list[1]) - 1])
 
 #new_log_list = readmsgthroughsymbolmsg2pdschdlphy(log_path, max_line=max_line_tmp)
 #print "cellId     sfn        subframe   preambleId prachCeLev timeOffset nrOfPreambles        preamblePower   (msg2pdschdlphy)"
 #for tmp_print in new_log_list:
 #    print tmp_print
+
+
+"""
 
 new_log_list = readmsgthroughsymbolmsg3ind(log_path, max_line=max_line_tmp)
 #print "cellId     sfn        subframe   preambleId prachCeLev timeOffset nrOfPreambles        preamblePower   (msg3ind)"
@@ -1489,4 +1492,5 @@ for i in new_log_list[2]:
         tmp_str = "%-" + str(new_log_list[3][j]) + "s "
         print tmp_str % i[j],
     tmp_str_last = "%-" + str(new_log_list[3][len(new_log_list[1]) - 1]) + "s "
-    print tmp_str_last % i[len(new_log_list[1]) - 1]
+    print (tmp_str_last % i[len(new_log_list[1]) - 1])
+"""
