@@ -29,9 +29,9 @@ def line_split(line_input, sep=re.compile(r'[\[\]\=\(\):;,\s]\s*'), word_list=[0
     selected_word = [split_word_no_space[i] for i in word_list]
     return selected_word
 
-with open('eggs1.log') as f:
+with open('C:/Users/eyulcui/Dropbox/LearnPython/raw_log/eggs1.log') as f:
     for line in f:
         split_line = line_split(line)
-        print split_line
+        print (split_line)
 
 
