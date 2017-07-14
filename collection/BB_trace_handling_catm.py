@@ -4,6 +4,17 @@ __version__ = "1.0"
 
 import re
 import sys
+import simplejson
+import json
+from tqdm import tqdm
+
+
+def count_line(fname):
+    with open(fname) as f:
+        for i, l in enumerate(f):
+            pass
+    #print ("method4 line number is: " + str(i+1))
+    return i + 1
 
 #if sys.argv[0] in dir():
 #    try:
@@ -29,24 +40,26 @@ lastBFN = 0
 wrappedBfnSub = 0
 currentBFN = 0
 currentSF = 0
+fp = open('msg2.json', 'w')
+
+logname = "C:/Users/eyulcui/Dropbox/Python_CATM/capture_lienb2466.dec"
+start_line_number = 0
+total_line = count_line(logname)
 #keyMsg = "UPC_DLMACCE_FI_SCHEDULE_RA_MSG2_REQ"
 
-#with open('C:/Users/eyulcui/Dropbox/LearnPython/raw_log/typical_trace.txt') as input_file:
+
+print ("Total line number for this log file is: " + str(total_line) + "\n", end="")
 print ("bfn+sf;cellId;nrOfPreambles;bbueref;preambleId;timingOffset;preamblePower;freqOffEstPrach;\n", end="")
 
-with open('C:\STUDY/Dropbox/LearnPython/raw_log/typical_trace.txt') as input_file:
-    for eachLine in input_file:
+with open(logname) as input_file:
+    progress_bar_file = tqdm(input_file,total=total_line)
+#with open('C:/Users/eyulcui/Dropbox/LearnPython/raw_log/typical_trace.txt') as input_file:
+#with open('C:\STUDY/Dropbox/LearnPython/raw_log/typical_trace.txt') as input_file:
+    for eachLine in progress_bar_file:
+
+        start_line_number += 1
 
         searchObj_Msg2 = re.compile(r'.*bfn:(\d*).*sf:(\d*).*LPP_UP_ULCELLPE_CI_SCHEDULE_RA_RESPONSE_IND', re.M | re.I)
-        searchObj_Msg2_cellId = re.compile(r'.*cellId (\S*),', re.M | re.I)
-        searchObj_Msg2_nrOfPreambles = re.compile(r'.*nrOfPreambles (\S*),', re.M | re.I)
-        searchObj_Msg2_subframeRach = re.compile(r'.*subframeRach (\S*),', re.M | re.I)
-        searchObj_Msg2_sfnRach = re.compile(r'.*sfnRach (\S*),', re.M | re.I)
-        searchObj_Msg2_bbUeRef = re.compile(r'.*bbUeRef (\S*),', re.M | re.I)
-        searchObj_Msg2_preambleId = re.compile(r'.*preambleId (\S*),', re.M | re.I)
-        searchObj_Msg2_timingOffset = re.compile(r'.*timingOffset (\S*),', re.M | re.I)
-        searchObj_Msg2_preamblePower = re.compile(r'.*preamblePower (\S*),', re.M | re.I)
-        searchObj_Msg2_freqOffEstPrach = re.compile(r'.*freqOffEstPrach (\S*),', re.M | re.I)
 
         if searchObj_Msg2.search(eachLine):
             currentBFN = int(searchObj_Msg2.search(eachLine).group(1))
@@ -61,6 +74,12 @@ with open('C:\STUDY/Dropbox/LearnPython/raw_log/typical_trace.txt') as input_fil
             #print (searchObj.group(0))
 
         elif stateMachine[0] == 1:
+            searchObj_Msg2_cellId = re.compile(r'.*cellId (\S*),', re.M | re.I)
+            searchObj_Msg2_nrOfPreambles = re.compile(r'.*nrOfPreambles (\S*),', re.M | re.I)
+            searchObj_Msg2_subframeRach = re.compile(r'.*subframeRach (\S*),', re.M | re.I)
+            searchObj_Msg2_sfnRach = re.compile(r'.*sfnRach (\S*),', re.M | re.I)
+
+
             if searchObj_Msg2_cellId.search(eachLine):
                 cellId = int(searchObj_Msg2_cellId.search(eachLine).group(1))
                 stateMachine[1] = cellId
@@ -80,6 +99,11 @@ with open('C:\STUDY/Dropbox/LearnPython/raw_log/typical_trace.txt') as input_fil
 
 
         if stateMachine[0] == 1 and stateMachine[2] ==1:
+            searchObj_Msg2_bbUeRef = re.compile(r'.*bbUeRef (\S*),', re.M | re.I)
+            searchObj_Msg2_preambleId = re.compile(r'.*preambleId (\S*),', re.M | re.I)
+            searchObj_Msg2_timingOffset = re.compile(r'.*timingOffset (\S*),', re.M | re.I)
+            searchObj_Msg2_preamblePower = re.compile(r'.*preamblePower (\S*),', re.M | re.I)
+            searchObj_Msg2_freqOffEstPrach = re.compile(r'.*freqOffEstPrach (\S*),', re.M | re.I)
 
             if searchObj_Msg2_bbUeRef.search(eachLine):
                 bbUeRef = int(searchObj_Msg2_bbUeRef.search(eachLine).group(1))
@@ -96,7 +120,10 @@ with open('C:\STUDY/Dropbox/LearnPython/raw_log/typical_trace.txt') as input_fil
             elif searchObj_Msg2_freqOffEstPrach.search(eachLine):
                 freqOffEstPrach = int(searchObj_Msg2_freqOffEstPrach.search(eachLine).group(1))
                 stateMachine = [0,0,0]
-                print (str(printBfnSub) + ";" + str(cellId) + ";" + str(nrOfPreambles) + ";"  + ";" + str(preambleId) + ";" + str(timingOffset) + ";" + str(preamblePower) + ";" + str(freqOffEstPrach) + ";" + "\n", end="")
+                msg2_output = [printBfnSub,cellId,nrOfPreambles,preambleId,timingOffset,preamblePower,freqOffEstPrach]
+                json.dump(msg2_output, fp)
+                print (str(printBfnSub) + ";" + str(cellId) + ";" + str(nrOfPreambles) + ";" + str(preambleId) + ";" + str(timingOffset) + ";" + str(preamblePower) + ";" + str(freqOffEstPrach) + ";" + "\n", end="")
+
 
 
 
