@@ -58,20 +58,34 @@ with open(logname) as input_file:
     for eachLine in progress_bar_file:
 
         start_line_number += 1
+        if "LPP_UP_ULCELLPE_CI_SCHEDULE_RA_RESPONSE_IND" in eachLine:
+            searchObj_Msg2 = re.compile(r'.*bfn:(\d*).*sf:(\d*).*LPP_UP_ULCELLPE_CI_SCHEDULE_RA_RESPONSE_IND', re.M | re.I)
 
-        searchObj_Msg2 = re.compile(r'.*bfn:(\d*).*sf:(\d*).*LPP_UP_ULCELLPE_CI_SCHEDULE_RA_RESPONSE_IND', re.M | re.I)
+            if searchObj_Msg2.search(eachLine):
+                currentBFN = int(searchObj_Msg2.search(eachLine).group(1))
+                currentSF = int(searchObj_Msg2.search(eachLine).group(2))
+                currentTiming = currentBFN*10 + currentSF
+                if currentTiming + 20000 < lastBFN:
+                    wrappedBfnSub = wrappedBfnSub + 1
+                lastBFN = currentTiming
+                printBfnSub = wrappedBfnSub * 40960 + currentTiming
+                stateMachine[0] = 1
+                #print (printBfnSub)
+                #print (searchObj.group(0))
 
-        if searchObj_Msg2.search(eachLine):
-            currentBFN = int(searchObj_Msg2.search(eachLine).group(1))
-            currentSF = int(searchObj_Msg2.search(eachLine).group(2))
-            currentTiming = currentBFN*10 + currentSF
-            if currentTiming + 20000 < lastBFN:
-                wrappedBfnSub = wrappedBfnSub + 1
-            lastBFN = currentTiming
-            printBfnSub = wrappedBfnSub * 40960 + currentTiming
-            stateMachine[0] = 1
-            #print (printBfnSub)
-            #print (searchObj.group(0))
+#Below are very bad example, very slow compare to above method, each regex rearch will cause around 2 seconds, well find function only need 0.2 second
+#        searchObj_Msg2 = re.compile(r'.*bfn:(\d*).*sf:(\d*).*LPP_UP_ULCELLPE_CI_SCHEDULE_RA_RESPONSE_IND', re.M | re.I)
+#        if searchObj_Msg2.search(eachLine):
+#            currentBFN = int(searchObj_Msg2.search(eachLine).group(1))
+#            currentSF = int(searchObj_Msg2.search(eachLine).group(2))
+#            currentTiming = currentBFN*10 + currentSF
+#            if currentTiming + 20000 < lastBFN:
+#                wrappedBfnSub = wrappedBfnSub + 1
+#            lastBFN = currentTiming
+#            printBfnSub = wrappedBfnSub * 40960 + currentTiming
+#            stateMachine[0] = 1
+#            #print (printBfnSub)
+#            #print (searchObj.group(0))
 
         elif stateMachine[0] == 1:
             searchObj_Msg2_cellId = re.compile(r'.*cellId (\S*),', re.M | re.I)
