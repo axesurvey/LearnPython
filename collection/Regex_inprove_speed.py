@@ -24,7 +24,6 @@ __version__ = "1.0"
 
 import re
 import sys
-import simplejson
 import json
 from tqdm import tqdm
 
@@ -74,6 +73,7 @@ print ("bfn+sf;cellId;nrOfPreambles;bbueref;preambleId;timingOffset;preamblePowe
 
 with open(logname) as input_file:
     progress_bar_file = tqdm(input_file,total=total_line)
+    start_time = time.time()
 #with open('C:/Users/eyulcui/Dropbox/LearnPython/raw_log/typical_trace.txt') as input_file:
 #with open('C:\STUDY/Dropbox/LearnPython/raw_log/typical_trace.txt') as input_file:
     for eachLine in progress_bar_file:
@@ -86,4 +86,6 @@ with open(logname) as input_file:
 
             if searchObj_Msg2.search(eachLine):
                 tmp_count += 1
-    print (tmp_count)
+    running_time = time.time() - start_time
+    print("Total match number is " + tmp_count)
+    print("Total time used is " + running_time)

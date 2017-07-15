@@ -1,15 +1,11 @@
 from __future__ import with_statement
-import time
-import mmap
-import random
-from collections import defaultdict
 from tqdm import tqdm
 
 def opcount_line(fname):
     with open(fname) as f:
         for i, l in enumerate(f):
             pass
-    print ("method4 line number is: " + str(i+1))
+    #print ("method4 line number is: " + str(i+1))
     return i + 1
 
 
@@ -17,7 +13,8 @@ start_line_number = 0
 #keyMsg = "UPC_DLMACCE_FI_SCHEDULE_RA_MSG2_REQ"
 
 
-logname = "C:/Users/eyulcui/Dropbox/Python_CATM/capture_lienb2466.dec"
+#logname = "C:/Users/eyulcui/Dropbox/Python_CATM/capture_lienb2466.dec"
+logname = "C:/STUDY/Dropbox/Python_CATM/capture_lienb2466.dec"
 file_lines = opcount_line(logname)
 
 print ("Total line number for this log file is: " + str(file_lines) + "\n", end="")
@@ -30,5 +27,7 @@ print ("Total line number for this log file is: " + str(file_lines) + "\n", end=
 
 
 f = open(logname,'r')
+i = 0
 for line in tqdm(f, total=opcount_line(logname)):
-    print ("222")
+    i += 1
+print (i)

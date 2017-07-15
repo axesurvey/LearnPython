@@ -1,10 +1,16 @@
 #coding:utf-8
 __author__ = "Yulin Cui"
 __version__ = "1.0"
+#to do list
+"""
+1. Add trouble shoot function, define a function, use this function to print different level of log printout.
+2. Convert one set of printout as data frame
+"""
+
 
 import re
 import sys
-import simplejson
+#import simplejson
 import json
 from tqdm import tqdm
 
