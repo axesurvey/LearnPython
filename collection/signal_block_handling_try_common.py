@@ -2,7 +2,7 @@
 # coding:utf-8
 import re
 import pandas as pd
-import tqdm
+from tqdm import tqdm
 
 
 def count_line(fname):
@@ -12,9 +12,10 @@ def count_line(fname):
     #print ("method4 line number is: " + str(i+1))
     return i + 1
 
-logname = "C:/Users/eyulcui/Dropbox/LearnPython/raw_log/typical_trace_fordebug.txt"
+#logname = "C:/STUDY/Dropbox/LearnPython/raw_log/typical_trace_fordebug.txt"
+logname = "C:/STUDY/Dropbox/Python_CATM/capture_lienb2466.dec"
 #logname = "C:/Users/eyulcui/Dropbox/Python_CATM/capture_lienb2466.dec"
-keyMsg = "LPP_UP_ULCELLPE_CI_SCHEDULE_RA_RESPONSE_IND"
+#keyMsg = "LPP_UP_ULCELLPE_CI_SCHEDULE_RA_RESPONSE_IND"
 total_line = count_line(logname)
 
 current_line_number = 0
@@ -34,33 +35,52 @@ each_sig_data = []
 each_ie_data = [-1, -1, -1]
 df_sig = pd.DataFrame()
 
+keyMsg = "UpDlMacPeCiDlCatmCchAllocInd"
+checker1 = "totalNrOfMsg"
+checker1_compile = r'totalNrOfMsg\s+(\d+)'
+checker2 = "nrOfComMsg"
+checker2_compile = r'nrOfComMsg\s+(\d+)'
 
 
 with open(logname) as input_file:
-    #progress_bar_file = tqdm(input_file, total=total_line)
-    #for index, line in enumerate(progress_bar_file):
-    for index, line in enumerate(input_file):
+    progress_bar_file = tqdm(input_file, total=total_line)
+    for index, line in enumerate(progress_bar_file):
+    #for index, line in enumerate(input_file):
 
-        if "LPP_UP_ULCELLPE_CI_SCHEDULE_RA_RESPONSE_IND" in line:
+        if keyMsg in line:
             #each_sig_loc[0] = start_loc
             #each_sig_loc[1] = index
             stateMachine = [1, 0, 0]
 
         if stateMachine[0] == 1:
             current_location = index
-            #print (stateMachine,signal_block_checker, index)
+            #print (stateMachine,signal_block_checker, index, line, end="")
 
-            if "nrOfPreambles" in line:
-                checker_1 = re.compile(r'nrOfPreambles\s+(\d+)', re.M | re.I)
-                if int(checker_1.search(line).group(1)) == 0:
-                #    checker_pass = 0
-                    signal_block_checker = -999
-                    each_ie_data = [-1, -1, -1]
-                    #each_sig_loc = [-1, -1, -1]
-                    each_sig_data = []
-                    stateMachine = [0, 0, 0]
-                #else:
-                #    checker_pass = 1
+            if checker1 in line:
+                checker_1 = re.compile(checker1_compile, re.M | re.I)
+                if checker_1.search(line):
+                    if int(checker_1.search(line).group(1)) == 0:
+                        #checker_pass = 0
+                        signal_block_checker = -999
+                        each_ie_data = [-1, -1, -1]
+                        #each_sig_loc = [-1, -1, -1]
+                        each_sig_data = []
+                        stateMachine = [0, 0, 0]
+                    #else:
+                    #    checker_pass = 1
+
+            if checker2 in line:
+                checker_2 = re.compile(checker2_compile, re.M | re.I)
+                if checker_2.search(line):
+                    if int(checker_2.search(line).group(1)) == 0:
+                        #checker_pass = 0
+                        signal_block_checker = -999
+                        each_ie_data = [-1, -1, -1]
+                        #each_sig_loc = [-1, -1, -1]
+                        each_sig_data = []
+                        stateMachine = [0, 0, 0]
+                    #else:
+                    #    checker_pass = 1
 
             if signal_block_checker == 0:
                 # elif re.search(re.compile("bfn:(\d*).*sf:(\d*)"), line):
@@ -99,12 +119,15 @@ with open(logname) as input_file:
                         # print(line, end="")
                         # print (str(signal_block_checker))
 
-                line_ie = re.compile(r'([a-zA-Z]+[\d]*[a-zA-Z]+[\d]*)\s+(\d+)', re.M | re.I)
+                line_ie = re.compile(r'([A-Za-z0-9_-]+)\s+(\d+)', re.M | re.I)
+                #line_ie = re.compile(r'([a-zA-Z]+[\d]*[a-zA-Z]+[\d]*)\s+(\d+)', re.M | re.I)
+                #if re.match("^[A-Za-z0-9_-]*$", my_little_string):
                 if line_ie.search(line):
                     # print (line_ie.search(line).group(0))
                     each_ie_data[0] = line_ie.search(line).group(1)
                     each_ie_data[1] = line_ie.search(line).group(2)
                     each_ie_data[2] = signal_block_checker
+                    #each_sig_data.append(index)
                     each_sig_data.append(tuple(each_ie_data[:]))
                     #print (each_ie_data)
 
